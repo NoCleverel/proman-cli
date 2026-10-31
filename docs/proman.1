@@ -1,0 +1,85 @@
+.\" Manpage for proman
+.TH PROMAN 1 "2026-11-01" "proman 0.3.0" "User Commands"
+.SH NAME
+proman \- standardized Git workflow & project launcher
+.SH SYNOPSIS
+.B proman
+.I COMMAND
+[\fIOPTIONS\fR] [\fIARGS\fR]
+.SH DESCRIPTION
+.B proman
+is a CLI tool that simplifies Git operations, project cloning, and local registry management.
+It can clone repositories, run project scripts, and manage SSH keys for GitLab/GitHub.
+.SH COMMANDS
+.TP
+.B integrate \fIprovider\fR [\fB\-\-hostname\fR|\fB\-H\fR \fIhost\fR]
+Configure CLI authentication (glab/gh).
+.TP
+.B init \fIurl\fR [\fB\-\-name\fR|\fB\-n\fR \fIname\fR] [\fB\-\-dest\fR|\fB\-d\fR \fIdir\fR] [\fB\-\-duration\-key\fR|\fB\-k\fR]
+Clone a repository, create run.pm.sh, and register it.
+.TP
+.B new \fIname\fR [\fB\-\-template\fR|\fB\-t\fR \fItemplate\fR] [\fB\-\-dest\fR|\fB\-d\fR \fIdir\fR]
+Create a new project from a template.
+.TP
+.B save \fImessage\fR [\fB\-\-project\fR|\fB\-p\fR \fIname\fR]
+Commit and push changes.
+.TP
+.B sync [\fB\-\-project\fR|\fB\-p\fR \fIname\fR]
+Pull with rebase and push.
+.TP
+.B run \fIname\fR
+Run the project's run.pm.sh script.
+.TP
+.B repath \fInew_path\fR
+Re-bind a project to a new path.
+.TP
+.B move \fIname\fR \fInew_path\fR
+Move a project folder and update the registry.
+.TP
+.B destroy \fIname\fR [\fB\-\-yes\fR|\fB\-y\fR]
+Remove a project from the registry (and optionally delete its folder and SSH key).
+.TP
+.B search \fIname\fR
+Find a lost project by name or language.
+.TP
+.B list
+Show all registered projects.
+.TP
+.B doctor
+Check the health of all registered projects.
+.TP
+.B stats
+Show statistics for all projects.
+.TP
+.B backup
+Archive all projects to the backup directory.
+.TP
+.B export \fIdest\fR
+Export the registry to JSON.
+.TP
+.B import \fIsrc\fR
+Import the registry from JSON.
+.SH OPTIONS
+.TP
+.B \-\-help
+Show help message and exit.
+.SH EXAMPLES
+.TP
+Clone a repository and add an SSH key:
+.nf
+proman init git@github.com:user/repo.git --duration-key
+.fi
+.TP
+Create a new project from a template:
+.nf
+proman new my-project --template python-basic
+.fi
+.TP
+Run a project by substring:
+.nf
+proman run SimpleDocker
+.fi
+.SH AUTHOR
+cleverel
+.SH REPORTING BUGS
+Please report bugs at https://github.com/your-repo/proman-cli/issues
