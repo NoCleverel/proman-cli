@@ -1,0 +1,18 @@
+pkgbase = proman-cli
+	pkgdesc = Standardized Git workflow, project launcher, and SSH key manager
+	pkgver = 0.3.0
+	pkgrel = 1
+	url = https://github.com/cleverelhome-cloud/proman-cli
+	arch = any
+	license = MIT
+	makedepends = python-build
+	makedepends = python-installer
+	makedepends = python-wheel
+	makedepends = python-setuptools
+	depends = python
+	depends = python-typer
+	depends = python-rich
+	source = https://github.com/cleverelhome-cloud/proman-cli/archive/refs/tags/v0.3.0.tar.gz
+	sha256sums = be2894b43f78c0fda880987b4b4bce52c68936123619a1cbddc9a5a59f56fab0
+
+pkgname = proman-cli
