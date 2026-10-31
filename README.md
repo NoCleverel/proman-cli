@@ -4,8 +4,15 @@ CLI for Git workflow, project launcher, lost project search, and deploy keys.
 
 ## Installation
 
-    pipx install proman-cli
+### Arch Linux / CachyOS (from source)
 
+Since AUR registration is temporarily closed, you can build and install `proman` directly from this repository:
+
+```bash
+git clone https://github.com/cleverelhome-cloud/proman-cli.git
+cd proman-cli
+makepkg -si
+```
 ## Quick start
 
     proman integrate gitlab --hostname gitlab.com
