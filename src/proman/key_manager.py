@@ -91,13 +91,19 @@ def cleanup_local(key: Path) -> None:
 
 def upload(provider: str, repo: str, key: Path, title: str,
            hostname: str | None = None) -> int:
+    """Adds SSH key to user's profile."""
     pub = key.with_suffix(key.suffix + ".pub")
     if provider == "gitlab":
+        # В старых версиях glab нет флага --replace.
+        # Если ключ уже есть, glab вернет ошибку 400, которую мы просто пропустим,
+        # так как ключ уже добавлен и клонирование пройдет успешно.
         r = _run(
-            ["glab", "ssh-key", "add", str(pub), "-t", title, "--replace"],
+            ["glab", "ssh-key", "add", str(pub), "-t", title],
             env=_glab_env(hostname),
         )
         if r.returncode != 0:
+            if "400" in r.stderr or "already" in r.stderr.lower():
+                return 0  # Игнорируем ошибку дубликата
             raise RuntimeError(f"glab ssh-key add failed: {r.stderr.strip()}")
         return 0
     if provider == "github":
